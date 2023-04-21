@@ -5,7 +5,7 @@ import java.awt.*;
 
 import contentPanels.homePanel;
 import contentPanels.roiPanel;
-import contentPanels.settingsPanel;
+import contentPanels.accountPanel;
 import contentPanels.uploadPanel;
 
 public class controller extends JPanel{
@@ -19,7 +19,7 @@ public class controller extends JPanel{
     homePanel homePanel;
     uploadPanel photoPanel;
     roiPanel roiPanel;
-    settingsPanel settingsPanel;
+    accountPanel accountPanel;
 
     public controller(){
         setLayout(new BorderLayout());
@@ -30,12 +30,12 @@ public class controller extends JPanel{
         homePanel.startSlideshow();//statting home slide show when program is opened 
         photoPanel = new uploadPanel();
         roiPanel = new roiPanel();
-        settingsPanel = new settingsPanel();
+        accountPanel = new accountPanel();
         
         cards.add(homePanel, "Homescreen");
         cards.add(photoPanel, "Upload Photos");
         cards.add(roiPanel, "ROI Table");
-        cards.add(settingsPanel, "Settings");
+        cards.add(accountPanel, "Account");
         //Export Files
 
         add(cards);

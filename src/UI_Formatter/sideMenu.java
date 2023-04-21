@@ -31,22 +31,6 @@ public class sideMenu {
         appName.add(appText);
         appName.add(appUnderLine);
 
-        //settings icon panel
-        JPanel settings = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        settings.setPreferredSize(new Dimension(200, 80));
-        settings.setBackground(colorPalette.dark);
-        //adding elements to menu panel
-        JLabel settingsLabel = new JLabel(new ImageIcon("src/UI_Formatter/Icons/icons8-automatic-32.png"));
-        JLabel settingsText = new JLabel("Settings");
-        settingsText.setFont(new Font("Arial", Font.PLAIN, 20));//resizing text within label
-        settingsText.setForeground(colorPalette.light);
-        //adding mouse listeners to the jlabels 
-        settingsLabel.addMouseListener(new MouseListener("Settings"));
-        settingsText.addMouseListener(new MouseListener("Settings"));
-        //adding elements to menu panel
-        settings.add(settingsLabel);
-        settings.add(settingsText);
-
         //home icon panel
         JPanel home = new JPanel(new FlowLayout(FlowLayout.LEFT));
         home.setPreferredSize(new Dimension(200, 100));
@@ -96,22 +80,6 @@ public class sideMenu {
         table.add(tableLabel);
         table.add(tableText);
 
-        //export icon panel
-        JPanel export = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        export.setPreferredSize(new Dimension(200, 100));
-        export.setBackground(colorPalette.dark);
-        //adding elements to export panel
-        JLabel exportLabel = new JLabel(new ImageIcon("src/UI_Formatter/Icons/icons8-export-32.png"));
-        JLabel exportText = new JLabel("Export");
-        exportText.setFont(new Font("Arial", Font.PLAIN, 20));//resizing text within label
-        exportText.setForeground(colorPalette.light);
-        //adding mouse listeners to the jlabels 
-        exportLabel.addMouseListener(new MouseListener("Export Files"));
-        exportText.addMouseListener(new MouseListener("Export Files"));
-        //adding elements to export panel
-        export.add(exportLabel);
-        export.add(exportText);
-
         //adding a space to seperate account from the rest of the icons
         JPanel space = new JPanel();
         space.setPreferredSize(new Dimension(200, 300));
@@ -139,11 +107,9 @@ public class sideMenu {
         leftCushion.setPreferredSize(new Dimension(200, 930));
         leftCushion.setBackground(colorPalette.dark);
 
-        leftCushion.add(settings);
         leftCushion.add(home);
         leftCushion.add(upload);
         leftCushion.add(table);
-        leftCushion.add(export);
         leftCushion.add(space);
         leftCushion.add(account);
 

@@ -8,9 +8,9 @@ import javax.swing.border.EmptyBorder;
 import UI_Formatter.sideMenu;
 import UI_Formatter.colorPalette;
 
-public class settingsPanel extends JPanel{
+public class accountPanel extends JPanel{
 
-    public settingsPanel(){
+    public accountPanel(){
 
         //side panel containing all the icons for the menu
         JPanel sidePanel = new JPanel();

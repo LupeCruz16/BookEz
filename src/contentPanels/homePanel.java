@@ -9,6 +9,7 @@ import javax.swing.*;
 import UI_Formatter.homeSlideShow;
 import UI_Formatter.sideMenu;
 import UI_Formatter.colorPalette;
+import UI_Formatter.accountFunc;
 
 public class homePanel extends JPanel{
 
@@ -94,13 +95,13 @@ public class homePanel extends JPanel{
         logoutLabel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 homeSlideShow.stopThread();//stopping animation 
-                System.exit(0);//ends program
+                accountFunc.logout();
             }
         });
         logoutText.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
                 homeSlideShow.stopThread();//stopping animation 
-                System.exit(0);//ends program
+                accountFunc.logout();
             }
         });
         //adding elements to appName panel

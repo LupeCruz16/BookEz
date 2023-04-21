@@ -15,10 +15,11 @@ import java.awt.datatransfer.DataFlavor;
 import Tables.pathTable;
 import UI_Formatter.fileUIController;
 import UI_Formatter.sideMenu;
+import UI_Formatter.accountFunc;
 import UI_Formatter.colorPalette;
 import UI_Formatter.roundPanelBorder;
-import Managers.ROIManager;
 import UI_Formatter.notification;
+import Managers.ROIManager;
 import Controller.controller;
 
 public class uploadPanel extends JPanel{
@@ -93,12 +94,12 @@ public class uploadPanel extends JPanel{
         //adding mouse listeners to the jlabels 
         logoutLabel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                System.exit(0);//ends program
+                accountFunc.logout();
             }
         });
         logoutText.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                System.exit(0);//ends program
+                accountFunc.logout();
             }
         });
         //adding elements to appName panel

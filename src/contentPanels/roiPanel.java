@@ -8,6 +8,7 @@ import Tables.roiTable;
 import UI_Formatter.fileUIController;
 import UI_Formatter.sideMenu;
 import UI_Formatter.colorPalette;
+import UI_Formatter.accountFunc;
 
 public class roiPanel extends JPanel{
 
@@ -80,12 +81,12 @@ public class roiPanel extends JPanel{
         //adding mouse listeners to the jlabels 
         logoutLabel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                System.exit(0);//ends program
+                accountFunc.logout();
             }
         });
         logoutText.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                System.exit(0);//ends program
+                accountFunc.logout();
             }
         });
         //adding elements to appName panel
@@ -134,7 +135,7 @@ public class roiPanel extends JPanel{
 
         middlePanel.setLayout(new BorderLayout());
         middlePanel.setBackground(colorPalette.background);
-        fileUIController.changeCard("ROI Content");
+        fileUIController.changeCard("No Files");
         fileUIController.setBackground(colorPalette.background);
         //adding content into the main panel
         middlePanel.add(fileUIController, BorderLayout.CENTER);
