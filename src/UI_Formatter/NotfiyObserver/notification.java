@@ -1,6 +1,9 @@
-package UI_Formatter;
+package UI_Formatter.NotfiyObserver;
 
 import javax.swing.*;
+
+import UI_Formatter.colorPalette;
+
 import java.awt.*;
 
 public class notification{

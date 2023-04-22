@@ -13,6 +13,7 @@ import contentPanels.uploadPanel;
 import Managers.ROIManager;
 import Controller.controller;
 import Tables.pdfExporter;
+import Managers.NotifObserverManager;
 
 public class roiPanelContent extends JPanel{
 
@@ -123,7 +124,7 @@ public class roiPanelContent extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 uploadPanel.getTable().clear();
-                notification.showNotificationPopup(controller.getFrame(), "Successfully Cleared Files", true);
+                NotifObserverManager.clearedFiles(controller.getFrame());
                 uploadPanel.changeToNoFiles();
                 roiPanel.changeToNoFiles();
                 ROIManager.resetID();//resetting identifyer 
@@ -133,7 +134,7 @@ public class roiPanelContent extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 uploadPanel.getTable().clear();
-                notification.showNotificationPopup(controller.getFrame(), "Successfully Cleared Files", true);
+                NotifObserverManager.clearedFiles(controller.getFrame());
                 uploadPanel.changeToNoFiles();
                 roiPanel.changeToNoFiles();
                 ROIManager.resetID();//resetting identifyer 
@@ -157,7 +158,7 @@ public class roiPanelContent extends JPanel{
     private void checkFiles(){
         //checking if all files were deleted
         if (uploadPanel.getTable().empty()){
-            notification.showNotificationPopup(controller.getFrame(), "All Files Have Been Deleted", true);
+            NotifObserverManager.allFilesDeleted(controller.getFrame());
             uploadPanel.changeToNoFiles();
             roiPanel.changeToNoFiles();
             ROIManager.resetID();//resetting identifyer

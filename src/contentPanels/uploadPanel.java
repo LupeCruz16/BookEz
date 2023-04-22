@@ -18,8 +18,8 @@ import UI_Formatter.sideMenu;
 import UI_Formatter.accountFunc;
 import UI_Formatter.colorPalette;
 import UI_Formatter.roundPanelBorder;
-import UI_Formatter.notification;
 import Managers.ROIManager;
+import Managers.NotifObserverManager;
 import Controller.controller;
 
 public class uploadPanel extends JPanel{
@@ -194,7 +194,7 @@ public class uploadPanel extends JPanel{
                         if (extension.equalsIgnoreCase("pdf")) {
                             ROIManager.readInDroppedFiles(Collections.singletonList(file));
                         } else {
-                            notification.showNotificationPopup(controller.getFrame(), "Incorrect File Format", false);
+                            NotifObserverManager.invalidFiles(controller.getFrame());
                         }
                     }
                     uploadSucess();

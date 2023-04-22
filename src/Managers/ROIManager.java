@@ -11,7 +11,6 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import Tables.roiTableWriter;
 import Tables.roiTable;
-import UI_Formatter.notification;
 import Controller.controller;
 import Objects.pathObject;
 import Tables.pathTable;
@@ -91,7 +90,7 @@ public class ROIManager{
             int valid = docText.indexOf("Order number");
     
             if (valid == -1) {
-                notification.showNotificationPopup(controller.getFrame(), "Incorrect File Format", false);
+                NotifObserverManager.invalidFiles(controller.getFrame());
                 pdfDocument.close(); // close the pdf document
                 return false; // file is invalid
             } else {

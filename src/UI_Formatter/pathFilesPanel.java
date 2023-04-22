@@ -10,6 +10,7 @@ import Tables.pathHeaderRenderer;
 import Managers.ROIManager;
 import Controller.controller;
 import contentPanels.roiPanel;
+import Managers.NotifObserverManager;
 
 public class pathFilesPanel extends JPanel{
 
@@ -89,7 +90,7 @@ public class pathFilesPanel extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 uploadPanel.getTable().clear();
-                notification.showNotificationPopup(controller.getFrame(), "Successfully Cleared Files", true);
+                NotifObserverManager.clearedFiles(controller.getFrame());
                 uploadPanel.changeToNoFiles();
                 roiPanel.changeToNoFiles();
                 ROIManager.resetID();//resetting identifyer 
@@ -99,7 +100,7 @@ public class pathFilesPanel extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 uploadPanel.getTable().clear();
-                notification.showNotificationPopup(controller.getFrame(), "Successfully Cleared Files", true);
+                NotifObserverManager.clearedFiles(controller.getFrame());
                 uploadPanel.changeToNoFiles();
                 roiPanel.changeToNoFiles();
                 ROIManager.resetID();//resetting identifyer 
@@ -124,7 +125,7 @@ public class pathFilesPanel extends JPanel{
     private void checkFiles(){
         //checking if all files were deleted
         if (uploadPanel.getTable().empty()){
-            notification.showNotificationPopup(controller.getFrame(), "All Files Have Been Deleted", true);
+            NotifObserverManager.allFilesDeleted(controller.getFrame());
             uploadPanel.changeToNoFiles();
             roiPanel.changeToNoFiles();
             ROIManager.resetID();//resetting identifyer
