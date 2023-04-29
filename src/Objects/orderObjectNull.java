@@ -1,8 +1,7 @@
 package Objects;
 
-public class orderObject implements orderObjectIF{
-
-    private String orderNum;
+public class orderObjectNull implements orderObjectIF {
+    private String orderNum ;
     Double total, shipCost, soldPrice, shipPaid, tax, profit;
 
     /**
@@ -15,7 +14,7 @@ public class orderObject implements orderObjectIF{
      * @param tax taxes paid 
      * @param profit profit made
      */
-    public orderObject(String orderNum, Double total, Double shipCost, Double soldPrice, Double shipPaid, Double tax, Double profit){
+    public orderObjectNull(String orderNum, Double total, Double shipCost, Double soldPrice, Double shipPaid, Double tax, Double profit){
   
         this.orderNum = orderNum;
         this.total = total;
@@ -28,59 +27,58 @@ public class orderObject implements orderObjectIF{
 
     //setter and getter methods
     public void setOrderNum(String orderNum){
-        this.orderNum = orderNum;
+        this.orderNum = null;
     }
 
     public String getOrderNum(){
-        return orderNum;
+        return null;
     }
 
     public void setTotal(Double total){
-        this.total = total;
+        this.total = null;
     }
 
     public Double getTotal(){
-        return total;
+        return null;
     }
 
     public void setShipCost(Double shipCost){
-        this.shipCost = shipCost;
+        this.shipCost = null;
     }
 
     public Double getShipCost(){
-        return shipCost;
+        return null;
     }
 
     public void setSoldPrice(Double soldPrice){
-        this.soldPrice = soldPrice;
+        this.soldPrice = null;
     }
 
     public Double getSoldPrice(){
-        return soldPrice;
+        return null;
     }
 
     public void setShipPaid(Double shipPaid){
-        this.shipPaid = shipPaid;
+        this.shipPaid = null;
     }
 
     public Double getShipPaid(){
-        return shipPaid;
+        return null;
     }
 
     public void setTax(Double tax){
-        this.tax = tax;
+        this.tax = null;
     }
 
     public Double getTax(){
-        return tax;
+        return null;
     }
 
     public void setProfit(Double profit){
-        this.profit = profit;
+        this.profit = null;
     }
 
     public Double getProfit(){
-        return profit;
+        return null;
     }
 }
-

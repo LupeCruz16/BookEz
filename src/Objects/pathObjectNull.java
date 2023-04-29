@@ -1,8 +1,6 @@
 package Objects;
 
-//class containing id for entire path and the path 
-public class pathObject implements pathObjectIF {
-
+public class pathObjectNull implements pathObjectIF {
     private int id;
     private String path;
 
@@ -11,7 +9,7 @@ public class pathObject implements pathObjectIF {
      * @param id path number in the order it was uploaded
      * @param path path name on local device
      */
-    public pathObject(int id, String path){
+    public pathObjectNull(int id, String path){
 
         this.id = id;
         this.path = path;
@@ -19,19 +17,18 @@ public class pathObject implements pathObjectIF {
 
     //setter and getter methods
     public void setID(int id){
-        this.id = id;
+        this.id = 0;
     }
 
     public int getID(){
-        return id;
+        return 0;
     }
 
     public void setpath(String path){
-        this.path = path;
+        this.path = null;
     }
 
     public String getPath(){
-        return path;
+        return null;
     }
 }
-
