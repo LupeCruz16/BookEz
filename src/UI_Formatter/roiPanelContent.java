@@ -10,7 +10,6 @@ import Tables.tableModification;
 import Tables.roiHeaderRenderer;
 import contentPanels.roiPanel;
 import contentPanels.uploadPanel;
-import Managers.ROIManager;
 import Controller.controller;
 import Tables.pdfExporter;
 import Managers.NotifObserverManager;
@@ -123,21 +122,13 @@ public class roiPanelContent extends JPanel{
         clearIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                uploadPanel.getTable().clear();
-                NotifObserverManager.clearedFiles(controller.getFrame());
-                uploadPanel.changeToNoFiles();
-                roiPanel.changeToNoFiles();
-                ROIManager.resetID();//resetting identifyer 
+                NotifObserverManager.clearedFiles(controller.getFrame()); 
             }
         });
         clearText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                uploadPanel.getTable().clear();
                 NotifObserverManager.clearedFiles(controller.getFrame());
-                uploadPanel.changeToNoFiles();
-                roiPanel.changeToNoFiles();
-                ROIManager.resetID();//resetting identifyer 
             }
         });
 
@@ -159,9 +150,6 @@ public class roiPanelContent extends JPanel{
         //checking if all files were deleted
         if (uploadPanel.getTable().empty()){
             NotifObserverManager.allFilesDeleted(controller.getFrame());
-            uploadPanel.changeToNoFiles();
-            roiPanel.changeToNoFiles();
-            ROIManager.resetID();//resetting identifyer
         }
     }
 }

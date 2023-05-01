@@ -7,9 +7,7 @@ import javax.swing.*;
 import contentPanels.uploadPanel;
 import Tables.tableModification;
 import Tables.pathHeaderRenderer;
-import Managers.ROIManager;
 import Controller.controller;
-import contentPanels.roiPanel;
 import Managers.NotifObserverManager;
 
 public class pathFilesPanel extends JPanel{
@@ -89,21 +87,13 @@ public class pathFilesPanel extends JPanel{
         clearIcon.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                uploadPanel.getTable().clear();
-                NotifObserverManager.clearedFiles(controller.getFrame());
-                uploadPanel.changeToNoFiles();
-                roiPanel.changeToNoFiles();
-                ROIManager.resetID();//resetting identifyer 
+                NotifObserverManager.clearedFiles(controller.getFrame()); 
             }
         });
         clearText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                uploadPanel.getTable().clear();
                 NotifObserverManager.clearedFiles(controller.getFrame());
-                uploadPanel.changeToNoFiles();
-                roiPanel.changeToNoFiles();
-                ROIManager.resetID();//resetting identifyer 
             }
         });
 
@@ -126,9 +116,6 @@ public class pathFilesPanel extends JPanel{
         //checking if all files were deleted
         if (uploadPanel.getTable().empty()){
             NotifObserverManager.allFilesDeleted(controller.getFrame());
-            uploadPanel.changeToNoFiles();
-            roiPanel.changeToNoFiles();
-            ROIManager.resetID();//resetting identifyer
         }
     }
 }
