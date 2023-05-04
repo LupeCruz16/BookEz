@@ -94,13 +94,11 @@ public class homePanel extends JPanel{
         //adding mouse listeners to the jlabels 
         logoutLabel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                homeSlideShow.stopThread();//stopping animation 
                 accountFunc.logout();
             }
         });
         logoutText.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                homeSlideShow.stopThread();//stopping animation 
                 accountFunc.logout();
             }
         });
