@@ -92,7 +92,7 @@ public class loginPanel extends JPanel{
             passwordField.setText("");
             wrongPasswordLabel.setVisible(false);
             fileUIController.changeCard("No Files");
-            controller.getInstance().changeCard("Homescreen");
+            controller.loginToHome();
             
         } else {
             // show fail message
