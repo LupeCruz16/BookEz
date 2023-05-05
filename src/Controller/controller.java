@@ -55,6 +55,13 @@ public class controller extends JPanel{
         instance = new controller();
 
         frame.getContentPane().add(instance);
+        frame.setSize(200, 200);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public static void loginToHome() {
+        controller.getInstance().changeCard("Homescreen");
         frame.setSize(1200, 1000);
         frame.setVisible(true);
     }
