@@ -10,6 +10,7 @@ public class roiTableWriter extends AbstractTableModel{
     "Charged Shipping", "Shipping Paid", "Taxes", "Profit", "Check Box"};
 
     private Object[][]data = {};
+    private totalsTableWriter t = totalsTable.returnWriter();
 
     @Override
     public int getColumnCount(){
@@ -51,43 +52,8 @@ public class roiTableWriter extends AbstractTableModel{
                                         order.getShipPaid(), order.getShipCost(), order.getTax(), 
                                         order.getProfit(), false};
         data = newData;//setting data to new data
+
         fireTableDataChanged();//updating table
-    }
-
-    /**
-     * Sums up all totals and places them into their designated column 
-     */
-    public void addTotals(){
-        int rowCount = getRowCount();//obtaining current rows in table
-        Object[][] newData = new Object[data.length + 1][];//adding a new row 
-        System.arraycopy(data, 0, newData, 0, rowCount);//copying over
-
-        //adding the new data into an array
-        newData[rowCount] = new Object[]{"N/A", getSum(1), getSum(2),
-                                        getSum(3), getSum(4), getSum(5), 
-                                        getSum(6), "N/A"};
-        data = newData;//setting data to new data
-        fireTableDataChanged();//update table
-
-    }
-
-    /**
-     * Obtaining the sum of a column 
-     * @param col Column to be summed 
-     * @return Double of the summed information
-     */
-    private double getSum(int col){
-        double sum = 0;//initialize the double to 0
-
-        //iterate through all the rows in a column
-        for(int row = 0; row < data.length; row++){
-            Object value = data[row][col];//find the column and current row 
-            if(value instanceof Double){//if it is a double then sum it up 
-                sum += (Double) value;//add to sum 
-            }
-        }
-
-        return Math.round(sum * 1000) / 1000.0;//return the rounded sum
     }
 
     /**
@@ -104,11 +70,10 @@ public class roiTableWriter extends AbstractTableModel{
                 if(delete){
                     deleteRow(i);//delete the row
                     p.deleteRow(i);//deleting the row from the path table
+                    
                 }
             }
         }
-        deleteRow(getRowCount() - 1);//deleting current totals row
-        addTotals();//adding new totals row
 
     }
 
@@ -124,11 +89,35 @@ public class roiTableWriter extends AbstractTableModel{
         for(int i = 0; i < data.length; i++){//iterate through current rows
             if(i != rowInd){//if not the one to be deleted
                 newData[newRowInd++] = data[i];//add into new data
+            } else {
+                //remove the values of the row from the totals
+                t.removeOrder(getRowOrderObject(i));
             }
         }
 
         data = newData;//set as data
         fireTableDataChanged();//update table
+    }
+
+    /**
+     * Will use the row to be deleted to create a new order object and return it to update the totalsTableWriter
+     * @param row key to rest of information
+     * @return order object
+     */
+    public orderObject getRowOrderObject(int row){
+        // get the values of the row to be deleted
+        String orderNum = (String) getValueAt(row, 0);
+        Double total = (Double) getValueAt(row, 1);
+        Double soldPrice = (Double) getValueAt(row, 2);
+        Double shipPaid = (Double) getValueAt(row, 4);
+        Double shipCost = (Double) getValueAt(row, 3);
+        Double tax = (Double) getValueAt(row, 5);
+        Double profit = (Double) getValueAt(row, 6);
+
+        // create an order object from the values
+        orderObject order = new orderObject(orderNum, total, soldPrice, shipPaid, shipCost, tax, profit);
+                
+        return order;
     }
 
     /**

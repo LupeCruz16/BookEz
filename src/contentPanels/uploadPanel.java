@@ -217,16 +217,18 @@ public class uploadPanel extends JPanel{
         //adding elements to topPanel panel
         topPanel.add(topCenter, BorderLayout.CENTER);
 
-        //bottomPanel panel
+       //bottomPanel panel
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new BorderLayout());
-        bottomPanel.setBorder(new EmptyBorder(0, 20, 20, 20));
-        bottomPanel.setBackground(Color.BLUE);
-        bottomPanel.setPreferredSize(new Dimension(1000, 400));
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+        bottomPanel.setBorder(new EmptyBorder(100, 20, 20, 20));
+        bottomPanel.setBackground(colorPalette.background);
+        bottomPanel.setPreferredSize(new Dimension(1000, 500));
+
         fileUIController.setBackground(colorPalette.background);
         fileUIController.changeCard("No Files");
+
         //adding elements to bottomPanel panel
-        bottomPanel.add(fileUIController, BorderLayout.CENTER);
+        bottomPanel.add(fileUIController);
 
         //adding panels into the main panel
         middlePanel.add(topPanel, BorderLayout.NORTH);
