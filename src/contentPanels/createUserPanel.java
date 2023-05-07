@@ -10,15 +10,16 @@ import Controller.controller;
 
 import Objects.loginObject;
 
-public class loginPanel extends JPanel{
+public class createUserPanel extends JPanel{
 
     private static fileUIController fileUIController = new fileUIController();
     JTextField usernameField;
     JPasswordField passwordField;
+    JPasswordField confirmPasswordField;
     JLabel wrongPasswordLabel;
     
 
-    public loginPanel(){
+    public createUserPanel(){
 
 
         //middle panel containing most of the content 
@@ -49,6 +50,10 @@ public class loginPanel extends JPanel{
 
         middlePanel.setLayout(new BoxLayout(middlePanel, BoxLayout.Y_AXIS));
 
+        JLabel headerLabel;
+        headerLabel = new JLabel("<html>Please create a unique<br>Username Password<br><br></html>");
+        middlePanel.add(headerLabel);
+
         // Create the username label and input field
         JLabel usernameLabel = new JLabel("Username:");
         usernameField = new JTextField();
@@ -63,6 +68,13 @@ public class loginPanel extends JPanel{
         middlePanel.add(passwordLabel);
         middlePanel.add(passwordField);
 
+        // Create the password label and input field
+        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
+        confirmPasswordField = new JPasswordField();
+        confirmPasswordField.setMaximumSize(new Dimension(300, 30)); // Set the preferred size to be 300x30 pixels
+        middlePanel.add(confirmPasswordLabel);
+        middlePanel.add(confirmPasswordField);
+
         // Label to show when password is wrong
         wrongPasswordLabel = new JLabel("");
         wrongPasswordLabel.setVisible(false);
@@ -70,53 +82,43 @@ public class loginPanel extends JPanel{
         middlePanel.add(wrongPasswordLabel);
 
         // Create the submit button and attach an ActionListener to call the checkPassword function
-        JButton submitButton = new JButton("Submit");
+        JButton submitButton = new JButton("Signup");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                checkPassword();
+                signup();
             }
         });
         middlePanel.add(submitButton);
-
-        // Create a new User
-        JLabel signUpLabel = new JLabel();
-        signUpLabel.setText("<html><u><b><font color='blue'><br>New User? Sign Up!</font></b></u></html>");
-        signUpLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                resetLoginUI();
-                controller.getInstance().changeCard("Create User");
-            }
-        });
-        middlePanel.add(signUpLabel);
-    }
-
-    private void resetLoginUI(){
-        wrongPasswordLabel.setVisible(false);
-        wrongPasswordLabel.setText("");
-        usernameField.setText("");
-        passwordField.setText("");
     }
 
     /**
      * Calling instance of fileUIController to change the card
      */
-    public static loginObject login(String username, String password){
-        return controller.getInstance().loginUser(username, password);
+    public static loginObject createUser(String username, String password){
+        return controller.getInstance().createUser(username, password);
     }
 
-    private void checkPassword() {
+    private void signup() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
-        loginObject login = login(username, password);
-        if(login.isSuccess()){
-            resetLoginUI();
+        String confirmedPassword = new String(confirmPasswordField.getPassword());
+        if(!confirmedPassword.equals(password)){
+            // show fail message for passwords not matching
+            wrongPasswordLabel.setVisible(true);
+            wrongPasswordLabel.setText("Passwords do not match");
+        }
+        loginObject createLogin = createUser(username, password);
+        if(createLogin.isSuccess()){
+            usernameField.setText("");
+            passwordField.setText("");
+            wrongPasswordLabel.setVisible(false);
+            controller.getInstance().loginUser(username, password);
             fileUIController.changeCard("No Files");
             controller.loginToHome();
         } else {
             // show fail message
             wrongPasswordLabel.setVisible(true);
-            wrongPasswordLabel.setText(login.getMessage());
+            wrongPasswordLabel.setText(createLogin.getMessage());
         }
     }
 
