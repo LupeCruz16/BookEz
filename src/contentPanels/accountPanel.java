@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import UI_Formatter.sideMenu;
+import UI_Formatter.accountFunc;
 import UI_Formatter.colorPalette;
 
 public class accountPanel extends JPanel{
@@ -72,12 +73,12 @@ public class accountPanel extends JPanel{
         //adding mouse listeners to the jlabels 
         logoutLabel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                System.exit(0);//ends program
+                accountFunc.logout(); // logs out to sign up username window
             }
         });
         logoutText.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                System.exit(0);//ends program
+                accountFunc.logout(); // logs out to sign up username window
             }
         });
         //adding elements to appName panel

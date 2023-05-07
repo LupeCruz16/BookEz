@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import Controller.controller;
 import UI_Formatter.homeSlideShow;
 import UI_Formatter.sideMenu;
 import UI_Formatter.colorPalette;
@@ -16,6 +17,7 @@ public class homePanel extends JPanel{
     private static homeSlideShow homeSlideShow;
     private static ArrayList<JLabel> images = new ArrayList<>();
     private static JPanel slideShowPanel;
+    private JLabel welcomeText;
    
     public homePanel(){
 
@@ -58,6 +60,11 @@ public class homePanel extends JPanel{
         add(sidePanel, BorderLayout.WEST);
     }
 
+    public void setNewUser(String user){
+        welcomeText.setText("Welcome "+ user);
+    }
+
+   
     /**
      * Constains logout icon
      * @param middleTop1 where content should be added
@@ -94,13 +101,11 @@ public class homePanel extends JPanel{
         //adding mouse listeners to the jlabels 
         logoutLabel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                homeSlideShow.stopThread();//stopping animation 
                 accountFunc.logout();
             }
         });
         logoutText.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                homeSlideShow.stopThread();//stopping animation 
                 accountFunc.logout();
             }
         });
@@ -127,11 +132,11 @@ public class homePanel extends JPanel{
         topSpace.setPreferredSize(new Dimension(850, 30));
         
         //welcome panel
-        JPanel welcome = new JPanel();
+        JPanel welcome = new JPanel(new FlowLayout(FlowLayout.LEFT));
         welcome.setBackground(colorPalette.med);
-        welcome.setPreferredSize(new Dimension(200, 50));
+        welcome.setPreferredSize(new Dimension(500, 50));
         //adding elements to panel
-        JLabel welcomeText = new JLabel("Welcome!");
+        welcomeText = new JLabel("Welcome!");
         welcomeText.setFont(new Font("Arial", Font.PLAIN, 40));//resizing text within label
         welcomeText.setForeground(colorPalette.light);
         //adding elements to welcome panel
