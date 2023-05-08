@@ -7,6 +7,7 @@ import java.awt.event.*;
 
 import Tables.roiTable;
 import Tables.tableModification;
+import Tables.totalsTable;
 import Tables.roiHeaderRenderer;
 import contentPanels.roiPanel;
 import contentPanels.uploadPanel;
@@ -17,6 +18,7 @@ import Managers.NotifObserverManager;
 public class roiPanelContent extends JPanel{
 
     private roiTable roi = new roiTable();
+    private totalsTable totals  = new totalsTable();
 
     public roiPanelContent(){
 
@@ -32,21 +34,35 @@ public class roiPanelContent extends JPanel{
 
         topPanel.add(optionsPanel(), BorderLayout.CENTER);
 
-        //bottomPanel panel houses the roi table 
+        //bottomPanel panel houses the tables
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
         bottomPanel.setBorder(new EmptyBorder(25, 20, 10, 20));
+
         bottomPanel.setBackground(colorPalette.background);
-        //adding elements to panel
-        JTable table = roi.getTable();//obtaining the abstract table
-        table.getTableHeader().setDefaultRenderer(new roiHeaderRenderer());
-        tableModification.roiColumnResizing(table);
-        tableModification.cellBackGroundColor(table);
-        JScrollPane tableScroll = new JScrollPane(table);
-        tableScroll.setBorder(tableModification.getTableBorder());
+        bottomPanel.setPreferredSize(new Dimension(900, 525));
+
+        //creating roiTables space
+        JTable roiTable = roi.getTable();//obtaining the abstract table
+        roiTable.getTableHeader().setDefaultRenderer(new roiHeaderRenderer());
+        tableModification.roiColumnResizing(roiTable);
+        tableModification.cellBackGroundColor(roiTable);
+        JScrollPane roiTableScroll = new JScrollPane(roiTable);
+        roiTableScroll.setBorder(tableModification.getTableBorder());
+        roiTableScroll.setPreferredSize(new Dimension(900, 440));
+
+        //creating roiTables space
+        JTable totalsTable = totals.getTable();
+        totalsTable.getTableHeader().setDefaultRenderer(new roiHeaderRenderer());
+        //tableModification.roiColumnResizing(totalsTable);
+        tableModification.cellBackGroundColor(totalsTable);
+        JScrollPane totalsTableScroll = new JScrollPane(totalsTable);
+        totalsTableScroll.setBorder(tableModification.getTableBorder());
+        totalsTableScroll.setPreferredSize(new Dimension(900, 55));
 
         //adding elements into the bottomPanel
-        bottomPanel.add(tableScroll);
+        bottomPanel.add(roiTableScroll, BorderLayout.NORTH);
+        bottomPanel.add(totalsTableScroll, BorderLayout.SOUTH);
 
         //adding panels into the main panel
         add(topPanel, BorderLayout.NORTH);
@@ -68,7 +84,7 @@ public class roiPanelContent extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    pdfExporter.createPDF(roi.getTable());
+                    pdfExporter.createPDF(roi.getTable(), totals.getTable());
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -78,7 +94,7 @@ public class roiPanelContent extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    pdfExporter.createPDF(roi.getTable());
+                    pdfExporter.createPDF(roi.getTable(), totals.getTable());
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }

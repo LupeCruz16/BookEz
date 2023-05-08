@@ -24,10 +24,6 @@ public class roiCheckBox extends JCheckBox implements TableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
             int row, int column) {
-            
-            if(row == table.getRowCount() - 1){
-                return new JLabel();
-            }
 
             if(value instanceof Boolean){
                 box.setSelected((Boolean) value);

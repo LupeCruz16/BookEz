@@ -12,8 +12,8 @@ import contentPanels.accountPanel;
 import contentPanels.uploadPanel;
 import contentPanels.loginPanel;
 import contentPanels.createUserPanel;
-
 import Objects.loginObject;
+
 
 
 public class controller extends JPanel{
@@ -65,6 +65,7 @@ public class controller extends JPanel{
         frame = new JFrame("BookEz");
 
         instance = new controller();
+
 
         frame.getContentPane().add(instance);
         frame.setSize(300, 300);
@@ -128,6 +129,44 @@ public class controller extends JPanel{
     public String getUser(){
         return username;
     }
+
+    // Login the user
+    public LoginObject loginUser(String username, String password){
+        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+        // check user
+        if(!credentials.containsKey(username)){
+            //return new logino(false, "User does not exist");
+            return new LoginObject(false,"User does not exist");
+        }
+        // check password
+        if(!encryptedPassword.equals(credentials.get(username))){
+            return new LoginObject(false, "incorrect Password");
+        }
+        this.username = username;
+        homePanel.setNewUser(username);
+        return new LoginObject(true, encryptedPassword);
+    }
+
+    public void logOut(){
+        controller.getInstance().changeCard("Login");
+        frame.setSize(300, 300);
+        this.username = "";
+    }
+
+    // Create a user and encrypt the credentials
+    public LoginObject createUser(String username, String password){
+        if(credentials.containsKey(username)){
+            // username is taken
+            return new LoginObject(false, "Username is Taken ");
+        }
+        if(password.length() < 6){
+            return new LoginObject(false, "Password is not long enough. Please add at least 6 characters");
+        }
+        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+        credentials.put(username, encryptedPassword);
+        return new LoginObject(true, encryptedPassword);
+    }
+
 
     public static controller getInstance(){
         return instance;

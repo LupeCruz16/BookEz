@@ -9,6 +9,7 @@ public class accountFunc {
      */
     public static void logout(){
        controller.getInstance().logOut();
+
     }
 }
  

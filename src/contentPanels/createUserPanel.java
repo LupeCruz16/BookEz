@@ -17,7 +17,6 @@ public class createUserPanel extends JPanel{
     JPasswordField passwordField;
     JPasswordField confirmPasswordField;
     JLabel wrongPasswordLabel;
-    
 
     public createUserPanel(){
 
@@ -41,7 +40,6 @@ public class createUserPanel extends JPanel{
         add(wrapperPanel, BorderLayout.CENTER);
     }
 
-    
     /**
      * Designing the main content of the panel
      * @param middlePanel where content should be added
@@ -96,7 +94,7 @@ public class createUserPanel extends JPanel{
      */
     public static loginObject createUser(String username, String password){
         return controller.getInstance().createUser(username, password);
-    }
+
 
     private void signup() {
         String username = usernameField.getText();
@@ -108,6 +106,7 @@ public class createUserPanel extends JPanel{
             wrongPasswordLabel.setText("Passwords do not match");
         }
         loginObject createLogin = createUser(username, password);
+
         if(createLogin.isSuccess()){
             usernameField.setText("");
             passwordField.setText("");

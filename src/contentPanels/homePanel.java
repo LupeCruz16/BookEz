@@ -61,9 +61,10 @@ public class homePanel extends JPanel{
     }
 
     public void setNewUser(String user){
-        welcomeText.setText("Welcome "+user);
+        welcomeText.setText("Welcome "+ user);
     }
 
+   
     /**
      * Constains logout icon
      * @param middleTop1 where content should be added
@@ -153,10 +154,16 @@ public class homePanel extends JPanel{
      */
     private void bottomMiddle(JPanel middlePanel){
 
-        middlePanel.setLayout(new GridLayout(2, 2, 10, 10));
+        JPanel topOfMiddle = new JPanel();
+        topOfMiddle.setBackground(colorPalette.background);
+        topOfMiddle.setPreferredSize(new Dimension(1000, 400));
+        topOfMiddle.setLayout(new GridLayout(1, 2, 10, 10));
 
+        //topLeft panel
         JPanel topLeft = new JPanel();
-        topLeft.setBackground(Color.RED);
+        topLeft.setBackground(colorPalette.background);
+        JLabel logo = new JLabel(new ImageIcon("src/UI_Formatter/Images/BookEzLogoTransparent6In.png"));
+        topLeft.add(logo);
         topLeft.setPreferredSize(new Dimension(350, 350));
 
         //slideShowPanel panel (topRight)
@@ -174,24 +181,24 @@ public class homePanel extends JPanel{
         //creating a homeSlideShow instance
         homeSlideShow = new homeSlideShow(images, slideShowPanel);
 
-        //bottomLeft panel
-        JPanel bottomLeft = new JPanel();
-        bottomLeft.setBackground(colorPalette.background);
-        bottomLeft.setPreferredSize(new Dimension(350, 350));
-        //adding elements to the panel
-        JLabel exportText = new JLabel("Exported Files");
+        //adding content onto topOfMiddle panel 
+        topOfMiddle.add(topLeft);
+        topOfMiddle.add(slideShowPanel);
 
-        //adding elements to the bottomLeft panel
-        bottomLeft.add(exportText);
-        JPanel bottomRight = new JPanel();
-        bottomRight.setBackground(Color.BLUE);
-        bottomRight.setPreferredSize(new Dimension(350, 350));
+        //bottomLeft panel
+        JPanel bottomOfMiddle = new JPanel();
+        bottomOfMiddle.setBackground(colorPalette.background);
+        bottomOfMiddle.setPreferredSize(new Dimension(950, 370));
+        //creating elements for bottomLeft panel
+        JLabel messageText = new JLabel("Effortless Booking with BookEz");
+        messageText.setFont(new Font("Arial", Font.PLAIN, 30));//resizing text within label
+        messageText.setForeground(colorPalette.light);
+        //adding elements to the panel
+        bottomOfMiddle.add(messageText);
 
         //adding panels into the main panel
-        middlePanel.add(topLeft);
-        middlePanel.add(slideShowPanel);
-        middlePanel.add(bottomLeft);
-        middlePanel.add(bottomRight);
+        middlePanel.add(topOfMiddle);
+        middlePanel.add(bottomOfMiddle);
 
     }
 

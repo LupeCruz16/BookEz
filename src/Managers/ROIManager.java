@@ -10,6 +10,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
 import Tables.roiTableWriter;
+import Tables.totalsTable;
+import Tables.totalsTableWriter;
 import Tables.roiTable;
 import Controller.controller;
 import Objects.pathObject;
@@ -21,6 +23,7 @@ public class ROIManager{
     private static Integer identifyer = 1;//for files id number 
     private static Integer nextEnd;//used to find desired strings 
     private static roiTableWriter r = roiTable.returnWriter();//creating an instance of roi table writer
+    private static totalsTableWriter t = totalsTable.returnWriter();
 
     /**
      * Reads in all files selected by the user from their local device
@@ -47,9 +50,10 @@ public class ROIManager{
                     }
             }
 
+            /* 
             if(valid){
                 r.addTotals();//finally adding final row of column totals to the roi table 
-            }
+            }*/
         }
     }
 
@@ -67,9 +71,11 @@ public class ROIManager{
                 }
         }
 
+        /* 
         if(valid){
             r.addTotals();//finally adding final row of column totals to the roi table 
         }
+        */
     }
 
     /**
@@ -95,7 +101,7 @@ public class ROIManager{
                 return false; // file is invalid
             } else {
                 pathTable.returnWriter().addRow(new pathObject(identifyer, path)); // adding the row into the path table
-                orderCollector(docText); // getting info from each pdf and adding to output.text file
+                orderCollector(docText); // getting info from each pdf and adding to the roiTable
                 identifyer++;
                 pdfDocument.close(); // close the pdf document
                 return true; // file is valid
@@ -150,8 +156,10 @@ public class ROIManager{
         profitC = profitCalc(total, shipCost, tax);      
 
         //adding extracted info into an orderObject and adding that information into the roi table
-        r.addRow(new orderObject(orderNum, total, shipCost, soldPrice, shipPaid, tax, profitC));
-
+        orderObject order = new orderObject(orderNum, total, shipCost, soldPrice, shipPaid, tax, profitC);
+        r.addRow(order);
+        t.addOrder(order);
+        
     }
 
     /**

@@ -7,6 +7,7 @@ import Objects.pathObject;
 public class pathTableWriter extends AbstractTableModel{
 
     private roiTableWriter r = roiTable.returnWriter();//creating an roi table writer variable 
+    private totalsTableWriter t = totalsTable.returnWriter();//creating a totals table writer variable
 
     private final String[] columnNames = {"Number", "Uploaded Files", "CheckBox"};
     private Object[][]data = {};
@@ -69,15 +70,6 @@ public class pathTableWriter extends AbstractTableModel{
             }
         }
 
-        //determining emptys current state 
-        if(getRowCount() == 0){
-            empty = true;
-        } else {
-            empty = false;
-        }
-
-        r.deleteRow(r.getRowCount() - 1);//deleting current totals row from the roi table
-        r.addTotals();//adding new totals row to the roi table 
     }
 
     /**
@@ -104,6 +96,12 @@ public class pathTableWriter extends AbstractTableModel{
      * @return true/false
      */
     public boolean getEmpty(){
+        //determining emptys current state 
+        if(getRowCount() == 0){
+            empty = true;
+        } else {
+            empty = false;
+        }
         return empty;
     }
 
@@ -120,8 +118,9 @@ public class pathTableWriter extends AbstractTableModel{
      */
     public void clearData(){
         data = new Object[0][0];
-        r.clearData();//clearing roi table as well
+        r.clearData();//clearing roi table
         ROIManager.resetID();//resetting identifyer
+        t.clearTotals();//clearing totals table
         empty = true;//setting empty to true
         fireTableDataChanged();
     }
