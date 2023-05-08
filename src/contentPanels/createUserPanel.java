@@ -8,8 +8,7 @@ import UI_Formatter.fileUIController;
 import UI_Formatter.colorPalette;
 import Controller.controller;
 
-import Objects.LoginObject;
-
+import Objects.loginObject;
 
 public class createUserPanel extends JPanel{
 
@@ -18,7 +17,6 @@ public class createUserPanel extends JPanel{
     JPasswordField passwordField;
     JPasswordField confirmPasswordField;
     JLabel wrongPasswordLabel;
-
 
     public createUserPanel(){
 
@@ -41,7 +39,6 @@ public class createUserPanel extends JPanel{
         //adding panels to format the main panel
         add(wrapperPanel, BorderLayout.CENTER);
     }
-
 
     /**
      * Designing the main content of the panel
@@ -95,11 +92,9 @@ public class createUserPanel extends JPanel{
     /**
      * Calling instance of fileUIController to change the card
      */
-    //public static LoginObject createUser(String username, String password){
-    public static LoginObject createUser(String username, String password){
+    public static loginObject createUser(String username, String password){
         return controller.getInstance().createUser(username, password);
-        //return controller.getInstance().createUser(username, password);
-    }
+
 
     private void signup() {
         String username = usernameField.getText();
@@ -110,7 +105,8 @@ public class createUserPanel extends JPanel{
             wrongPasswordLabel.setVisible(true);
             wrongPasswordLabel.setText("Passwords do not match");
         }
-        LoginObject createLogin = createUser(username, password);
+        loginObject createLogin = createUser(username, password);
+
         if(createLogin.isSuccess()){
             usernameField.setText("");
             passwordField.setText("");

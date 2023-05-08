@@ -8,7 +8,7 @@ import UI_Formatter.fileUIController;
 import UI_Formatter.colorPalette;
 import Controller.controller;
 
-import Objects.LoginObject;
+import Objects.loginObject;
 
 public class loginPanel extends JPanel{
 
@@ -16,7 +16,6 @@ public class loginPanel extends JPanel{
     JTextField usernameField;
     JPasswordField passwordField;
     JLabel wrongPasswordLabel;
-
 
     public loginPanel(){
 
@@ -39,8 +38,7 @@ public class loginPanel extends JPanel{
         //adding panels to format the main panel
         add(wrapperPanel, BorderLayout.CENTER);
     }
-
-
+    
     /**
      * Designing the main content of the panel
      * @param middlePanel where content should be added
@@ -64,7 +62,8 @@ public class loginPanel extends JPanel{
         middlePanel.add(passwordField);
 
         // Label to show when password is wrong
-        wrongPasswordLabel = new JLabel("");
+        wrongPasswordLabel = new JLabel(" ");
+
         wrongPasswordLabel.setVisible(false);
         wrongPasswordLabel.setForeground(new Color(255, 0, 0));
         middlePanel.add(wrongPasswordLabel);
@@ -101,14 +100,14 @@ public class loginPanel extends JPanel{
     /**
      * Calling instance of fileUIController to change the card
      */
-    public static LoginObject login(String username, String password){
+    public static loginObject login(String username, String password){
         return controller.getInstance().loginUser(username, password);
     }
 
     private void checkPassword() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
-        LoginObject login = login(username, password);
+        loginObject login = login(username, password);
         if(login.isSuccess()){
             resetLoginUI();
             fileUIController.changeCard("No Files");
@@ -119,5 +118,4 @@ public class loginPanel extends JPanel{
             wrongPasswordLabel.setText(login.getMessage());
         }
     }
-
 }

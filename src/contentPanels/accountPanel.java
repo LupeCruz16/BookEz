@@ -73,6 +73,7 @@ public class accountPanel extends JPanel{
         //adding mouse listeners to the jlabels 
         logoutLabel.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
+                accountFunc.logout();
                 accountFunc.logout(); // logs out to sign up username window
             }
         });

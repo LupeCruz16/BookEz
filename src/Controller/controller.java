@@ -12,7 +12,8 @@ import contentPanels.accountPanel;
 import contentPanels.uploadPanel;
 import contentPanels.loginPanel;
 import contentPanels.createUserPanel;
-import Objects.LoginObject;
+import Objects.loginObject;
+
 
 
 public class controller extends JPanel{
@@ -33,13 +34,13 @@ public class controller extends JPanel{
     createUserPanel createUserPanel;
 
     public controller(){
+        credentials = new HashMap<>();
         setLayout(new BorderLayout());
         setSize(300, 300);
         cards = new JPanel(new CardLayout());
 
         loginPanel = new loginPanel();
         createUserPanel = new createUserPanel();
-
         homePanel = new homePanel();
         homePanel.startSlideshow();//statting home slide show when program is opened 
         photoPanel = new uploadPanel();
@@ -82,10 +83,51 @@ public class controller extends JPanel{
         createAndDisplay();
     }
 
-    //to move between panels 
+    // To move between panels 
     public void changeCard(String card){
         CardLayout c1 = (CardLayout) (cards.getLayout());
         c1.show(cards, card);
+
+    }
+
+    // Login the user
+    public loginObject loginUser(String username, String password){
+        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+        // check user
+        if(!credentials.containsKey(username)){
+            return new loginObject(false, "User does not exist");
+        }
+        // check password
+        if(!encryptedPassword.equals(credentials.get(username))){
+            return new loginObject(false, "Incorrect Password");
+        }
+        this.username = username;
+        homePanel.setNewUser(username);
+        return new loginObject(true);
+    }
+
+    public void logOut(){
+        controller.getInstance().changeCard("Login");
+        frame.setSize(300, 300);
+        this.username = "";
+    }
+
+    // Create a user and encrypt the credentials
+    public loginObject createUser(String username, String password){
+        if(credentials.containsKey(username)){
+            // username is taken
+            return new loginObject(false,"Username is taken");
+        }
+        if(password.length() < 6){
+            return new loginObject(false,"Password is not long enough. Please add at least 6 characters");
+        }
+        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
+        credentials.put(username, encryptedPassword);
+        return new loginObject(true);
+    }
+
+    public String getUser(){
+        return username;
     }
 
     // Login the user
