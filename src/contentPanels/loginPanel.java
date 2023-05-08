@@ -64,7 +64,7 @@ public class loginPanel extends JPanel{
         middlePanel.add(passwordField);
 
         // Label to show when password is wrong
-        wrongPasswordLabel = new JLabel("");
+        wrongPasswordLabel = new JLabel(" ");
         wrongPasswordLabel.setVisible(false);
         wrongPasswordLabel.setForeground(new Color(255, 0, 0));
         middlePanel.add(wrongPasswordLabel);
