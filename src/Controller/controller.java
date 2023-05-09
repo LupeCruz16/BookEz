@@ -10,7 +10,6 @@ import contentPanels.uploadPanel;
 import contentPanels.loginPanel;
 import contentPanels.createUserPanel;
 
-
 public class controller extends JPanel{
 
     private static controller instance;

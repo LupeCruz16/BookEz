@@ -87,6 +87,7 @@ public class ROIManager{
     private static boolean readInSingleFile(File file) {
         try {
             String path = file.getAbsolutePath() + "\n"; // collect path
+            path = path.substring(path.indexOf("Ebay Orders/") + "Ebay Orders/".length());//only displaying file path after Sales Record
             FileInputStream fis = new FileInputStream(file); // create new input stream
             PDDocument pdfDocument = PDDocument.load(fis); // load in pdf document
             PDFTextStripper pdfTextStripper = new PDFTextStripper(); // obtain text

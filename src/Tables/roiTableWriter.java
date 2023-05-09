@@ -1,5 +1,6 @@
 package Tables;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import javax.swing.table.AbstractTableModel;
 import Objects.orderObject;
@@ -28,9 +29,14 @@ public class roiTableWriter extends AbstractTableModel{
     }
 
     @Override
-    public Object getValueAt(int row, int col){
+    public Object getValueAt(int row, int col) {
+    if (data[row][col] instanceof Double) {
+        double value = (double) data[row][col];
+        return new DecimalFormat("#0.00").format(value);
+    } else {
         return data[row][col];
     }
+}
 
     @Override
     public void setValueAt(Object value, int row, int col){

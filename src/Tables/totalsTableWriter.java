@@ -29,7 +29,7 @@ public class totalsTableWriter extends AbstractTableModel {
         if (col == 0) {
             return "Totals";
         } else {
-            return totals[col - 1];
+            return String.format("%.2f", totals[col - 1]);
         }
     }
 
@@ -68,7 +68,7 @@ public class totalsTableWriter extends AbstractTableModel {
      * Resetting the totals to 0.0 
      */
     public void clearTotals() {
-        totals = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        totals = new Double[]{0.00, 0.00, 0.00, 0.00, 0.00, 0.00};
         fireTableDataChanged();
     }
 }
