@@ -30,13 +30,17 @@ public class roiTableWriter extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int row, int col) {
-    if (data[row][col] instanceof Double) {
-        double value = (double) data[row][col];
-        return new DecimalFormat("#0.00").format(value);
-    } else {
-        return data[row][col];
+        if(col == 0){
+            return data[row][col];
+        } else {
+            if (data[row][col] instanceof Double) {
+                double value = (double) data[row][col];
+                return new DecimalFormat("#0.00").format(value);
+            } else {
+                return data[row][col];
+            }
+        }
     }
-}
 
     @Override
     public void setValueAt(Object value, int row, int col){
@@ -113,13 +117,13 @@ public class roiTableWriter extends AbstractTableModel{
     public orderObject getRowOrderObject(int row){
         // get the values of the row to be deleted
         String orderNum = (String) getValueAt(row, 0);
-        Double total = (Double) getValueAt(row, 1);
-        Double soldPrice = (Double) getValueAt(row, 2);
-        Double shipPaid = (Double) getValueAt(row, 4);
-        Double shipCost = (Double) getValueAt(row, 3);
-        Double tax = (Double) getValueAt(row, 5);
-        Double profit = (Double) getValueAt(row, 6);
-
+        Double total = Double.valueOf(getValueAt(row, 1).toString());
+        Double soldPrice = Double.valueOf(getValueAt(row, 2).toString());
+        Double shipPaid = Double.valueOf(getValueAt(row, 4).toString());
+        Double shipCost = Double.valueOf(getValueAt(row, 3).toString());
+        Double tax = Double.valueOf(getValueAt(row, 5).toString());
+        Double profit = Double.valueOf(getValueAt(row, 6).toString());
+    
         // create an order object from the values
         orderObject order = new orderObject(orderNum, total, soldPrice, shipPaid, shipCost, tax, profit);
                 

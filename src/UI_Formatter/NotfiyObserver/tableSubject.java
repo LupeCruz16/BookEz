@@ -21,16 +21,15 @@ public class tableSubject implements subject{
     }
 
     public void notifyObservers() {
-        //create a copy of the observers list
-        ArrayList<notifObserver> observersCopy = (ArrayList<notifObserver>) observers.clone();
+        //creating a seperate list to remove the observers after they have been called 
+        ArrayList<notifObserver> observersToRemove = new ArrayList<>();
 
-        //notify all observers in the copy
-        for (notifObserver o : observersCopy) {
+        for (notifObserver o : observers) {
             o.update();
+            observersToRemove.add(o);
         }
 
-        //remove all observers from the original list
-        observers.removeAll(observersCopy);
+        observers.removeAll(observersToRemove);
     }
 
     public void allFilesDeleted() {
