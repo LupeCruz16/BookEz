@@ -148,6 +148,10 @@ public class roiPanelContent extends JPanel{
             }
         });
 
+        JLabel sortText= new JLabel("Click on the column header to sort");
+        sortText.setFont(new Font("Arial", Font.PLAIN, 20));//resizing text within label
+        sortText.setForeground(colorPalette.light);
+
         //adding the elements into the topPanel
         JPanel options = new JPanel();
         options.setLayout(new BoxLayout(options, BoxLayout.Y_AXIS));
@@ -155,6 +159,7 @@ public class roiPanelContent extends JPanel{
         options.add(export);
         options.add(clear);
         options.add(delete);
+        options.add(sortText);
 
         return options;
     }

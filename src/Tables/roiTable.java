@@ -3,6 +3,8 @@ package Tables;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 
 public class roiTable {
     private static roiTableWriter t = new roiTableWriter();//creating an instance of table writer
@@ -35,6 +37,21 @@ public class roiTable {
                 }
             }
         });
+
+        // add mouse listener to table header to sort table
+        JTableHeader tableHeader = table.getTableHeader();
+        tableHeader.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int col = tableHeader.columnAtPoint(e.getPoint());
+                if (col > 0 && col < finalTableValues.roiCheckCol) { //ensuring that the column is valid to be sorted
+                    boolean ascending = true; // assume ascending order
+                    TableColumnModel columnModel = table.getColumnModel();
+                    int selectedColumn = columnModel.getColumn(col).getModelIndex();
+                    t.sortTable(selectedColumn, ascending);
+                }
+            }
+        });
+        
         return table;//returning the jtable
 
     }

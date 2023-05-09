@@ -102,9 +102,9 @@ public class accountPanel extends JPanel{
         //upload panel
         JPanel upload = new JPanel();
         upload.setBackground(colorPalette.med);
-        upload.setPreferredSize(new Dimension(500, 50));
+        upload.setPreferredSize(new Dimension(175, 50));
         //adding elements to panel
-        JLabel uploadText = new JLabel("Settings");
+        JLabel uploadText = new JLabel("Account");
         uploadText.setFont(new Font("Arial", Font.PLAIN, 40));//resizing text within label
         uploadText.setForeground(colorPalette.light);
         //adding elements to upload panel
@@ -128,11 +128,16 @@ public class accountPanel extends JPanel{
         topPanel.setPreferredSize(new Dimension(1000, 250));
         //adding elements to panel
         JPanel topCenter = new JPanel();
-        topCenter.setBackground(Color.BLUE);
+        topCenter.setBackground(colorPalette.background);
        
-        //adding elements to center panel
+        //creating elements for top center panel
+        JLabel jacocoText = new JLabel("Jacoco...?");
+        jacocoText.setFont(new Font("Arial", Font.PLAIN, 40));//resizing text within label
+        jacocoText.setForeground(colorPalette.light);
 
-
+        //adding elements to top center panel
+        topCenter.add(jacocoText);
+        
         //adding elements to topPanel panel
         topPanel.add(topCenter, BorderLayout.CENTER);
 
