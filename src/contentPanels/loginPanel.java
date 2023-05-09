@@ -7,7 +7,7 @@ import javax.swing.*;
 import UI_Formatter.fileUIController;
 import UI_Formatter.colorPalette;
 import Controller.controller;
-
+import Managers.LoginManager;
 import Objects.loginObject;
 
 public class loginPanel extends JPanel{
@@ -16,6 +16,7 @@ public class loginPanel extends JPanel{
     JTextField usernameField;
     JPasswordField passwordField;
     JLabel wrongPasswordLabel;
+    static LoginManager LoginManager = new LoginManager();
 
     public loginPanel(){
 
@@ -79,7 +80,7 @@ public class loginPanel extends JPanel{
 
         // Create a new User
         JLabel signUpLabel = new JLabel();
-        signUpLabel.setText("<html><u><b><font color='blue'><br>New User? Sign Up!</font></b></u></html>");
+        signUpLabel.setText("<html><b><font color='blue'><br> Sign Up </font></b></html>");
         signUpLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -101,7 +102,7 @@ public class loginPanel extends JPanel{
      * Calling instance of fileUIController to change the card
      */
     public static loginObject login(String username, String password){
-        return controller.getInstance().loginUser(username, password);
+        return Managers.LoginManager.loginUser(username, password);
     }
 
     private void checkPassword() {
@@ -111,7 +112,7 @@ public class loginPanel extends JPanel{
         if(login.isSuccess()){
             resetLoginUI();
             fileUIController.changeCard("No Files");
-            controller.loginToHome();
+            Managers.LoginManager.loginToHome();
         } else {
             // show fail message
             wrongPasswordLabel.setVisible(true);

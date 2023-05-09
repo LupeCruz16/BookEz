@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import Controller.controller;
 import UI_Formatter.homeSlideShow;
 import UI_Formatter.sideMenu;
 import UI_Formatter.colorPalette;
@@ -17,7 +16,7 @@ public class homePanel extends JPanel{
     private static homeSlideShow homeSlideShow;
     private static ArrayList<JLabel> images = new ArrayList<>();
     private static JPanel slideShowPanel;
-    private JLabel welcomeText;
+    private static JLabel welcomeText;
    
     public homePanel(){
 
@@ -60,7 +59,7 @@ public class homePanel extends JPanel{
         add(sidePanel, BorderLayout.WEST);
     }
 
-    public void setNewUser(String user){
+    public static void setNewUser(String user){
         welcomeText.setText("Welcome "+ user);
     }
 

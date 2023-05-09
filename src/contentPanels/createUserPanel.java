@@ -6,8 +6,7 @@ import javax.swing.*;
 
 import UI_Formatter.fileUIController;
 import UI_Formatter.colorPalette;
-import Controller.controller;
-
+import Managers.LoginManager;
 import Objects.loginObject;
 
 public class createUserPanel extends JPanel{
@@ -93,8 +92,8 @@ public class createUserPanel extends JPanel{
      * Calling instance of fileUIController to change the card
      */
     public static loginObject createUser(String username, String password){
-        return controller.getInstance().createUser(username, password);
-
+        return LoginManager.createUser(username, password);
+    }
 
     private void signup() {
         String username = usernameField.getText();
@@ -111,9 +110,9 @@ public class createUserPanel extends JPanel{
             usernameField.setText("");
             passwordField.setText("");
             wrongPasswordLabel.setVisible(false);
-            controller.getInstance().loginUser(username, password);
+            LoginManager.loginUser(username, password);
             fileUIController.changeCard("No Files");
-            controller.loginToHome();
+            LoginManager.loginToHome();
         } else {
             // show fail message
             wrongPasswordLabel.setVisible(true);

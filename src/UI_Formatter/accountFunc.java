@@ -1,6 +1,6 @@
 package UI_Formatter;
 
-import Controller.controller;
+import Managers.LoginManager;
 
 public class accountFunc {
 
@@ -8,7 +8,7 @@ public class accountFunc {
      * Function will be used to logout of the users account
      */
     public static void logout(){
-       controller.getInstance().logOut();
+       LoginManager.logOut();
 
     }
 }

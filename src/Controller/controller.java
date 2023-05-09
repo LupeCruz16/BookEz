@@ -2,9 +2,6 @@ package Controller;
 import java.awt.CardLayout;
 import javax.swing.*;
 import java.awt.*;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
 
 import contentPanels.homePanel;
 import contentPanels.roiPanel;
@@ -12,16 +9,12 @@ import contentPanels.accountPanel;
 import contentPanels.uploadPanel;
 import contentPanels.loginPanel;
 import contentPanels.createUserPanel;
-import Objects.loginObject;
-
 
 
 public class controller extends JPanel{
 
     private static controller instance;
     private static JFrame frame;
-    private String username;
-    private Map<String, String> credentials;
 
     JPanel cards;//create panel of cards
 
@@ -34,7 +27,7 @@ public class controller extends JPanel{
     createUserPanel createUserPanel;
 
     public controller(){
-        credentials = new HashMap<>();
+        //credentials = new HashMap<>();
         setLayout(new BorderLayout());
         setSize(300, 300);
         cards = new JPanel(new CardLayout());
@@ -42,7 +35,7 @@ public class controller extends JPanel{
         loginPanel = new loginPanel();
         createUserPanel = new createUserPanel();
         homePanel = new homePanel();
-        homePanel.startSlideshow();//statting home slide show when program is opened 
+        homePanel.startSlideshow();//statting home slide show when the user logs in 
         photoPanel = new uploadPanel();
         roiPanel = new roiPanel();
         accountPanel = new accountPanel();
@@ -52,29 +45,23 @@ public class controller extends JPanel{
         cards.add(homePanel, "Homescreen");
         cards.add(photoPanel, "Upload Photos");
         cards.add(roiPanel, "ROI Table");
-        cards.add(accountPanel, "Account");
-        //Export Files
+        cards.add(accountPanel, "Account");//needs to be completed
+        //future additon: export Files
 
         add(cards);
         setVisible(true);
 
-    }//end of public controller 
+    } 
 
-    //dispalying homescreen panel to begin 
+    /**
+     * Creating and displaying the slides
+     */
     private static void createAndDisplay(){
         frame = new JFrame("BookEz");
 
         instance = new controller();
 
-
         frame.getContentPane().add(instance);
-        frame.setSize(300, 300);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-
-    public static void loginToHome() {
-        controller.getInstance().changeCard("Homescreen");
         frame.setSize(1200, 1000);
         frame.setVisible(true);
     }
@@ -83,90 +70,14 @@ public class controller extends JPanel{
         createAndDisplay();
     }
 
-    // To move between panels 
+    /**
+     * Changes current visible panel
+     * @param card name of panel to be changed to 
+     */
     public void changeCard(String card){
         CardLayout c1 = (CardLayout) (cards.getLayout());
         c1.show(cards, card);
-
     }
-
-    // Login the user
-    public loginObject loginUser(String username, String password){
-        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
-        // check user
-        if(!credentials.containsKey(username)){
-            return new loginObject(false, "User does not exist");
-        }
-        // check password
-        if(!encryptedPassword.equals(credentials.get(username))){
-            return new loginObject(false, "Incorrect Password");
-        }
-        this.username = username;
-        homePanel.setNewUser(username);
-        return new loginObject(true);
-    }
-
-    public void logOut(){
-        controller.getInstance().changeCard("Login");
-        frame.setSize(300, 300);
-        this.username = "";
-    }
-
-    // Create a user and encrypt the credentials
-    public loginObject createUser(String username, String password){
-        if(credentials.containsKey(username)){
-            // username is taken
-            return new loginObject(false,"Username is taken");
-        }
-        if(password.length() < 6){
-            return new loginObject(false,"Password is not long enough. Please add at least 6 characters");
-        }
-        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
-        credentials.put(username, encryptedPassword);
-        return new loginObject(true);
-    }
-
-    public String getUser(){
-        return username;
-    }
-
-    // Login the user
-    public LoginObject loginUser(String username, String password){
-        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
-        // check user
-        if(!credentials.containsKey(username)){
-            //return new logino(false, "User does not exist");
-            return new LoginObject(false,"User does not exist");
-        }
-        // check password
-        if(!encryptedPassword.equals(credentials.get(username))){
-            return new LoginObject(false, "incorrect Password");
-        }
-        this.username = username;
-        homePanel.setNewUser(username);
-        return new LoginObject(true, encryptedPassword);
-    }
-
-    public void logOut(){
-        controller.getInstance().changeCard("Login");
-        frame.setSize(300, 300);
-        this.username = "";
-    }
-
-    // Create a user and encrypt the credentials
-    public LoginObject createUser(String username, String password){
-        if(credentials.containsKey(username)){
-            // username is taken
-            return new LoginObject(false, "Username is Taken ");
-        }
-        if(password.length() < 6){
-            return new LoginObject(false, "Password is not long enough. Please add at least 6 characters");
-        }
-        String encryptedPassword = Base64.getEncoder().encodeToString(password.getBytes());
-        credentials.put(username, encryptedPassword);
-        return new LoginObject(true, encryptedPassword);
-    }
-
 
     public static controller getInstance(){
         return instance;
