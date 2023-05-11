@@ -16,13 +16,13 @@ public class orderObjectNull implements orderObjectIF {
      */
     public orderObjectNull(String orderNum, Double total, Double shipCost, Double soldPrice, Double shipPaid, Double tax, Double profit){
   
-        this.orderNum = orderNum;
-        this.total = total;
-        this.shipCost = shipCost;
-        this.soldPrice = soldPrice;
-        this.shipPaid = shipPaid;
-        this.tax = tax;
-        this.profit = profit;
+        this.orderNum = null;
+        this.total = null;
+        this.shipCost = null;
+        this.soldPrice = null;
+        this.shipPaid = null;
+        this.tax = null;
+        this.profit = null;
     }
 
     //setter and getter methods

@@ -11,8 +11,8 @@ public class pathObjectNull implements pathObjectIF {
      */
     public pathObjectNull(int id, String path){
 
-        this.id = id;
-        this.path = path;
+        this.id = 0;
+        this.path = null;
     }
 
     //setter and getter methods
