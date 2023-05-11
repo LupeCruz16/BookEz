@@ -138,13 +138,11 @@ public class roiTableWriter extends AbstractTableModel{
     public void sortTable(int columnIndex, boolean ascending) {
 
         int rowCount = data.length;//obtaining current amount of rows 
-        Integer[] sortIndices = new Integer[rowCount - 1];//creating an array to store values of said column
+        Integer[] sortIndices = new Integer[rowCount];//creating an array to store values of said column
         int sortInd = 0;//finding out the length of all rows minus the final one 
 
         for (int i = 0; i < rowCount; i++) {//looping through the rows 
-            if(i != rowCount - 1){//if its not the last one 
-                sortIndices[sortInd++] = i;//add it to te array 
-            }
+            sortIndices[sortInd++] = i;//add it to the array
         }
 
         //sorting the array of row values 
@@ -169,12 +167,8 @@ public class roiTableWriter extends AbstractTableModel{
 
         //itterating through all rows
         for (int i = 0; i < rowCount; i++) {
-            if(i != rowCount - 1){//if not last row then add to data
-                sortedData[sortedInd++] = data[sortIndices[i]];
-            } else {//if last row then add in regularly 
-                sortedData[sortedInd++] = data[i];
-            }
-            
+            sortedData[sortedInd++] = data[sortIndices[i]];
+    
         }
 
         data = sortedData;//set data to sorted data 
